@@ -17,3 +17,5 @@ local.properties
 releasekeystore
 releasekeystore.properties
 */build
+build-history.bin
+.idea

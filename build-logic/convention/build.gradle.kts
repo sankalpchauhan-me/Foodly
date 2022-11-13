@@ -34,39 +34,39 @@ gradlePlugin {
     val suffix = "foodly" //also chane in module level gradle
     plugins {
         register("androidApplicationCompose") {
-            id = "$suffix.android.application.compose"
+            id = "${suffix}.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
         register("androidApplication") {
-            id = "$suffix.android.application"
+            id = "${suffix}.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("androidLibraryCompose") {
-            id = "$suffix.android.library.compose"
+            id = "${suffix}.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("androidLibrary") {
-            id = "$suffix.android.library"
+            id = "${suffix}.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
         register("androidFeature") {
-            id = "$suffix.android.feature"
+            id = "${suffix}.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
         register("androidLibraryJacoco") {
-            id = "$suffix.android.library.jacoco"
+            id = "${suffix}.android.library.jacoco"
             implementationClass = "AndroidLibraryJacocoConventionPlugin"
         }
         register("androidTest") {
-            id = "$suffix.android.test"
+            id = "${suffix}.android.test"
             implementationClass = "AndroidTestConventionPlugin"
         }
         register("androidHilt") {
-            id = "$suffix.android.hilt"
+            id = "${suffix}.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
         register("firebase-perf") {
-            id = "$suffix.firebase-perf"
+            id = "${suffix}.firebase-perf"
             implementationClass = "FirebasePerfConventionPlugin"
         }
     }

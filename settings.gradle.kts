@@ -15,3 +15,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Foodly"
 include (":app")
+include(":core:designsystem")
+include(":core:main")
+include(":foodly-catalouge")

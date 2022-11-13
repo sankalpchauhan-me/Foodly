@@ -1,21 +1,25 @@
 import java.util.Properties
 import java.io.FileInputStream
 
+
 val debugKeystorePropertiesFile = rootProject.file("debugkeystore.properties")
 val debugKeystoreProperties = Properties()
 debugKeystoreProperties.load(FileInputStream(debugKeystorePropertiesFile))
 
-val releaseKeystorePropertiesFile = rootProject.file("releasekeystore.properties")
-val releaseKeystoreProperties = Properties()
-releaseKeystoreProperties.load(FileInputStream(releaseKeystorePropertiesFile))
+/**
+ * comment if using debug
+ */
+//val releaseKeystorePropertiesFile = rootProject.file("releasekeystore.properties")
+//val releaseKeystoreProperties = Properties()
+//releaseKeystoreProperties.load(FileInputStream(releaseKeystorePropertiesFile))
 
 plugins {
-    val buildLogicSuffix = "foodly"
-    id("${buildLogicSuffix}.android.application")
-    id("${buildLogicSuffix}.android.application.compose")
-    id("${buildLogicSuffix}.android.hilt")
+    val suffix = "foodly"
+    id("${suffix}.android.application")
+    id("${suffix}.android.application.compose")
+    id("${suffix}.android.hilt")
     id("jacoco")
-    id("${buildLogicSuffix}.firebase-perf")
+    id("${suffix}.firebase-perf")
 }
 
 android {
@@ -36,12 +40,15 @@ android {
             storeFile = file(debugKeystoreProperties["storeFile"]!!)
             storePassword = debugKeystoreProperties["storePassword"] as String
         }
-        create("release"){
-            keyAlias = releaseKeystoreProperties["keyAlias"] as String
-            keyPassword = releaseKeystoreProperties["keyPassword"] as String
-            storeFile = file(releaseKeystoreProperties["storeFile"]!!)
-            storePassword = releaseKeystoreProperties["storePassword"] as String
-        }
+        /**
+         * comment if using debug
+         */
+//        create("release"){
+//            keyAlias = releaseKeystoreProperties["keyAlias"] as String
+//            keyPassword = releaseKeystoreProperties["keyPassword"] as String
+//            storeFile = file(releaseKeystoreProperties["storeFile"]!!)
+//            storePassword = releaseKeystoreProperties["storePassword"] as String
+//        }
     }
 
     buildTypes {
@@ -52,7 +59,8 @@ android {
         val release by getting {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("release")
+            //signingConfig = signingConfigs.getByName("release") // comment if using debug
+            signingConfig = signingConfigs.getByName("debug") // comment if using release
             isDebuggable = false
         }
         val benchmark by creating {
