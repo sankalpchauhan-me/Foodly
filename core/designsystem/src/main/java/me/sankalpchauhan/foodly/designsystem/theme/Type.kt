@@ -1,10 +1,12 @@
 package me.sankalpchauhan.foodly.designsystem.theme
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import me.sankalpchauhan.foodly.designsystem.R
 
@@ -16,6 +18,16 @@ val sfProTextFamily = FontFamily(
     Font(R.font.sf_pro_text_medium, FontWeight.W500),
     Font(R.font.sf_pro_text_semibold, FontWeight.W600)
 )
+
+object AppTextStyles{
+    val tsRegular16Underlined:TextStyle = TextStyle(
+        fontWeight = FontWeight.W400,
+        fontFamily = sfProTextFamily,
+        fontSize = 16.sp,
+        lineHeight = 16.sp,
+        textDecoration = TextDecoration.Underline
+    )
+}
 
 internal val AppTypography = Typography(
     displayLarge = TextStyle(

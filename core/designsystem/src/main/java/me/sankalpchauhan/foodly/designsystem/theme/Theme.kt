@@ -3,6 +3,9 @@ package me.sankalpchauhan.foodly.designsystem.theme
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.ripple.LocalRippleTheme
+import androidx.compose.material.ripple.RippleAlpha
+import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -29,16 +32,29 @@ fun AppTheme(
 
 val LightDefaultTheme = lightColorScheme(
     primary = Red,
-    surface = LightBackground,
+    primaryContainer = Red,
+    onPrimary = Color.White,
+    surface = Color.White,
     onBackground = Red,
+    secondaryContainer = SecondaryButtonContainer,
+    onSecondary = Black,
+    tertiaryContainer = Color.Black,
+    onTertiary = Color.White,
 )
 
 val DarkDefaultTheme = darkColorScheme(
-    primary = Color.Black,
+    primary = Red,
+    primaryContainer = Maroon,
+    onPrimary = Color.Black,
     surface = DarkPurpleGray10,
+    secondaryContainer = Orange30,
+    onSecondary = Orange80,
+    onBackground = DarkPurpleGray90,
+    tertiaryContainer = Color.White,
+    onTertiary = Color.Black
 )
 
-val LightAndroidBackgroundTheme = BackgroundTheme(color = LightBackground)
+val LightAndroidBackgroundTheme = BackgroundTheme(color = Color.White)
 val DarkAndroidBackgroundTheme = BackgroundTheme(color = Color.Black)
 
 
@@ -64,7 +80,7 @@ internal fun AppTheme(
     val gradientColors = GradientColors()
     val defaultBackgroundTheme = BackgroundTheme(
         color = colorScheme.surface,
-        tonalElevation = 2.dp
+        tonalElevation = 0.dp
     )
     val backgroundTheme = if (androidTheme) {
         if (darkTheme) DarkAndroidBackgroundTheme else LightAndroidBackgroundTheme
@@ -73,7 +89,8 @@ internal fun AppTheme(
     }
     CompositionLocalProvider(
         LocalGradientColors provides gradientColors,
-        LocalBackgroundTheme provides backgroundTheme
+        LocalBackgroundTheme provides backgroundTheme,
+        LocalRippleTheme provides AppRippleTheme
     ) {
         MaterialTheme(
             colorScheme = colorScheme,
@@ -82,4 +99,19 @@ internal fun AppTheme(
         )
     }
 
+}
+
+private object AppRippleTheme : RippleTheme {
+    // Here you should return the ripple color you want
+    // and not use the defaultRippleColor extension on RippleTheme.
+    // Using that will override the ripple color set in DarkMode
+    // or when you set light parameter to false
+    @Composable
+    override fun defaultColor(): Color = MaterialTheme.colorScheme.primary
+
+    @Composable
+    override fun rippleAlpha(): RippleAlpha = RippleTheme.defaultRippleAlpha(
+        Color.Black,
+        lightTheme = !isSystemInDarkTheme()
+    )
 }
